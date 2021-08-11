@@ -18,12 +18,4 @@ public class Zombie : MonoBehaviour
         transform.right = target.transform.position - transform.position;
         transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
     }
-
-    void OnCollisionEnter(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            Destroy(collision.gameObject);
-        }
-    }
 }
