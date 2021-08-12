@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6505710592645623450}
   - component: {fileID: 6693147935794463797}
   - component: {fileID: -2613683271437424902}
+  - component: {fileID: -1357550268585608996}
   m_Layer: 0
   m_Name: bullet
   m_TagString: Untagged
@@ -123,3 +124,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   survival_time: 5
+--- !u!50 &-1357550268585608996
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7647330929689460508}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: 762e5bb7d51ca7945915550d60238a6c, type: 2}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
