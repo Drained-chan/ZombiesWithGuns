@@ -33,8 +33,13 @@ public class Shooter : MonoBehaviour
         
 
     }
-void Shoot()
+    void Shoot()
     {
         Instantiate(bullet, transform.position, Quaternion.identity);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+            Destroy(gameObject);
     }
 }

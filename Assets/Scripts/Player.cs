@@ -30,8 +30,13 @@ public class Player : MonoBehaviour
         // Make character move
         transform.Translate(moveDelta * Time.deltaTime * speed);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);
+        if (collision.gameObject.tag == "Bullet")
+        {
+            Destroy(gameObject);
+            Destroy(collision.gameObject);
+        }
+        
     }
 }
