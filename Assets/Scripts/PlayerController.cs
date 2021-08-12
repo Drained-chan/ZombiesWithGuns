@@ -30,4 +30,8 @@ public class PlayerController : MonoBehaviour
         // Make character move
         transform.Translate(moveDelta * Time.deltaTime * speed);
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Destroy(gameObject);
+    }
 }

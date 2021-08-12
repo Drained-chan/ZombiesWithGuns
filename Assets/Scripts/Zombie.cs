@@ -15,6 +15,7 @@ public class Zombie : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        transform.right = target.transform.position - transform.position;
         transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
     }
 }
