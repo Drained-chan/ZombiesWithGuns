@@ -9,6 +9,7 @@ public class ZombieBasicShooter : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private float FireRate = 5f;
     [SerializeField] private float immunity = 0.5f;
+    private ZombieMovement ZombieMovement;
     float timeLeft;
 
     // Start is called before the first frame update
@@ -23,7 +24,7 @@ public class ZombieBasicShooter : MonoBehaviour
     {
         Debug.Log(timeLeft);
         transform.right = target.transform.position - transform.position;
-        if (timeLeft < 0)
+        if ((timeLeft < 0) && (ZombieMovement.isChasing))
         {
             Shoot();
             timeLeft = FireRate;
