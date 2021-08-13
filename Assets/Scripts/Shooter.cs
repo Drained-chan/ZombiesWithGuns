@@ -7,28 +7,28 @@ public class Shooter : MonoBehaviour
 
     public GameObject bullet;
     public Transform target;
-    public float fire_rate = 5f;
-    float time_left;
+    public float FireRate = 5f;
+    float timeLeft;
     // Start is called before the first frame update
     void Start()
     {
         target = GameObject.Find("Player").GetComponent<Transform>();
-        time_left = fire_rate;
+        timeLeft = FireRate;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(time_left);
+        Debug.Log(timeLeft);
         transform.right = target.transform.position - transform.position;
-        if (time_left < 0)
+        if (timeLeft < 0)
         {
             Shoot();
-            time_left = fire_rate;
+            timeLeft = FireRate;
         }
         else
         {
-            time_left -= Time.deltaTime;
+            timeLeft -= Time.deltaTime;
         }
         
 

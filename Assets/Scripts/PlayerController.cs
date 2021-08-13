@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     private BoxCollider2D boxCollider;
     private Vector3 moveDelta;
-    public float speed = 5;
+    public float Speed = 5;
+    public bool CanDie = false;
 
     private void Start()
     {
@@ -28,13 +29,14 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
 
         // Make character move
-        transform.Translate(moveDelta * Time.deltaTime * speed);
+        transform.Translate(moveDelta * Time.deltaTime * Speed);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            Destroy(gameObject);
+            if (CanDie)
+                Destroy(gameObject);
             Destroy(collision.gameObject);
         }
         
