@@ -5,10 +5,12 @@ using UnityEngine;
 public class ZombieBasicShooter : MonoBehaviour
 {
 
-    public GameObject bullet;
-    public Transform target;
-    public float FireRate = 5f;
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private Transform target;
+    [SerializeField] private float FireRate = 5f;
+    [SerializeField] private float immunity = 0.5f;
     float timeLeft;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +41,8 @@ public class ZombieBasicShooter : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.gameObject.tag == "Bullet") && (timeLeft < FireRate - 1))
+        // If zombie has shot in the the last second, be immune to 
+        if ((collision.gameObject.tag == "Bullet") && (timeLeft < FireRate - immunity))
             Destroy(gameObject);
     }
 }
