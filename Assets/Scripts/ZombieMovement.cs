@@ -34,6 +34,7 @@ public class ZombieMovement : MonoBehaviour
         }
         float distance = Vector3.Distance(target.transform.position, gameObject.transform.position);
 
+        // If isChasing, move towards the player, else move to waypoint
         if (isChasing)
             Move(target.position.x, target.position.y);
         else
@@ -47,6 +48,8 @@ public class ZombieMovement : MonoBehaviour
         float x = Random.Range(-range, range);
         return x;
     }
+
+    // Moves Zombie towards an (x, y) coordinate
     void Move(float x, float y)
     {
         transform.position = Vector2.MoveTowards(transform.position, new Vector3(x, y, 0), Speed * Time.deltaTime);
