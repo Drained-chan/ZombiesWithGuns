@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Zombie : MonoBehaviour
 {
-    public Transform target;
-    public float speed = 4;
+    Transform target;
+    public float Speed = 4;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +16,7 @@ public class Zombie : MonoBehaviour
     void FixedUpdate()
     {
         transform.right = target.transform.position - transform.position;
-        transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target.position, Speed * Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
