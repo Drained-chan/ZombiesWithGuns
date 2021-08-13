@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Zombie : MonoBehaviour
+public class ZombieMovement : MonoBehaviour
 {
     Transform target;
     public float Speed = 4;
@@ -13,7 +13,7 @@ public class Zombie : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         transform.right = target.transform.position - transform.position;
         transform.position = Vector2.MoveTowards(transform.position, target.position, Speed * Time.deltaTime);
