@@ -20,6 +20,15 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        transform.rotation = MathUtils.Rotation.FromVector(MouseUtils.GetWorldMousePos(transform.position) - transform.position);
+        //point towards mouse
+        transform.rotation = MathUtils.Rotation.FromVector(
+            MouseUtils.GetWorldMousePos(transform.position) - transform.position);
+
+        //the velocity the player has signalled they want to go
+        Vector2 targetVelocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized * maxSpeed;
+
+        Vector2 netForce = acceleration * Time.deltaTime * (targetVelocity - rigidbody2d.velocity);
+
+        rigidbody2d.AddForce(netForce);
     }
 }
