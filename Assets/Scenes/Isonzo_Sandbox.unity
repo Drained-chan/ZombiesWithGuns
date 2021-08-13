@@ -472,6 +472,7 @@ GameObject:
   - component: {fileID: 409707603}
   - component: {fileID: 409707602}
   - component: {fileID: 409707601}
+  - component: {fileID: 409707606}
   - component: {fileID: 409707604}
   - component: {fileID: 409707605}
   m_Layer: 0
@@ -494,6 +495,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 4
+  range: 1
+  wanderTime: 5
+  isChasing: 0
 --- !u!212 &409707602
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -606,6 +610,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &409707606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409707600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f146b7cc4b51c50439752cab7bb00f81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 7647330929689460508, guid: dfbaad82aa08ec145a8ffdcf44ad02ba, type: 3}
+  target: {fileID: 1030322198}
+  FireRate: 5
+  immunity: 0.5
 --- !u!1 &417497116
 GameObject:
   m_ObjectHideFlags: 0

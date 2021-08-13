@@ -23,7 +23,8 @@ public class ZombieBasicShooter : MonoBehaviour
     void Update()
     {
         Debug.Log(timeLeft);
-        transform.right = target.transform.position - transform.position;
+        if (ZombieMovement.isChasing)
+            transform.right = target.transform.position - transform.position;
         if ((timeLeft < 0) && (ZombieMovement.isChasing))
         {
             Shoot();
