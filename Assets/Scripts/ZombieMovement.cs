@@ -6,15 +6,18 @@ public class ZombieMovement : MonoBehaviour
 {
     Transform target;
     public float Speed = 4f;
-    [SerializeField] private float range = 5f;
+    [SerializeField] private float range = 1f;
     [SerializeField] private float wanderTime = 5f;
     private float wanderTimeCounter;
     private bool isChasing = false;
+    private float xWaypoint = 0f;
+    private float yWaypoint = 0f;
+   
 
     // Start is called before the first frame update
     void Start()
     {
-        wanderTimeCounter = wanderTime;
+        wanderTimeCounter = 0f;
         target = GameObject.Find("Player").GetComponent<Transform>();
     }
 
@@ -26,26 +29,27 @@ public class ZombieMovement : MonoBehaviour
         if (wanderTimeCounter < 0)
         {
             wanderTimeCounter = wanderTime;
-            var waypoint = Waypoint(range);
+            xWaypoint = transform.position.x - Waypoint(range);
+            yWaypoint = transform.position.y - Waypoint(range);
         }
         float distance = Vector3.Distance(target.transform.position, gameObject.transform.position);
-        
-        transform.position = Vector2.MoveTowards(transform.position, target.position, Speed * Time.deltaTime);
 
-        
+        if (isChasing)
+            Move(target.position.x, target.position.y);
+        else
+            Move(xWaypoint, yWaypoint);
     }
 
 
     // Waypoint returns two floats, so we can use them as coordinates.
-    (float, float) Waypoint(float range) //Returns two floats for use as a waypoint
+    float Waypoint(float range) //Returns two floats for use as a waypoint
     {
         float x = Random.Range(-range, range);
-        float y = Random.Range(-range, range);
-        return (x, y);
+        return x;
     }
-    void Wander(float x, float y)
+    void Move(float x, float y)
     {
-
+        transform.position = Vector2.MoveTowards(transform.position, new Vector3(x, y, 0), Speed * Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
