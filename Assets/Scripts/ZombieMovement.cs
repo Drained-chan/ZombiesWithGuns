@@ -9,7 +9,7 @@ public class ZombieMovement : MonoBehaviour
     [SerializeField] private float range = 1f;
     [SerializeField] private float wanderTime = 5f;
     private float wanderTimeCounter;
-    bool isChasing = false;
+    public bool isChasing = false;
     private float xWaypoint = 0f;
     private float yWaypoint = 0f;
    
