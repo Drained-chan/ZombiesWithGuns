@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 71516705}
   - component: {fileID: 71516704}
   - component: {fileID: 71516707}
+  - component: {fileID: 71516708}
   m_Layer: 0
   m_Name: 'Main Camera '
   m_TagString: MainCamera
@@ -221,6 +222,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followedObject: {fileID: 2129741070}
   followDelay: 6
+--- !u!114 &71516708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71516703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281ab73558b1fdf4cbae611adeb1fc91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseDeadzone: 10.2
+  mouseLookDistance: {x: 2, y: 3}
+  mouseLookSpeed: {x: 0.02, y: 0.02}
+  mouseViewScaling: 0.07
+  cameraShakeIntensityMultiplier: 1
+  cameraShakeDurationMultiplier: 1
 --- !u!1 &136244880
 GameObject:
   m_ObjectHideFlags: 0
