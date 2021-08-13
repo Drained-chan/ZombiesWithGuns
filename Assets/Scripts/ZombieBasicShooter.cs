@@ -41,7 +41,7 @@ public class ZombieBasicShooter : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // If zombie has shot in the the last second, be immune to 
+        // If zombie has shot in the the last second, be immune to bullets for a certain amount of time
         if ((collision.gameObject.tag == "Bullet") && (timeLeft < FireRate - immunity))
             Destroy(gameObject);
     }
