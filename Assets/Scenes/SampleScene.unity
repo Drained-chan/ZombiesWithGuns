@@ -493,8 +493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a65200936845ab40a7881e97cfd10e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  speed: 2
+  Speed: 4
 --- !u!212 &409707602
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1402,9 +1401,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1030322198}
   - component: {fileID: 1030322197}
-  - component: {fileID: 1030322196}
   - component: {fileID: 1030322199}
   - component: {fileID: 1030322200}
+  - component: {fileID: 1030322196}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1424,7 +1423,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee9834ff2e9fb54dacd1c7f9b2be377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  acceleration: 10
+  maxSpeed: 15
 --- !u!212 &1030322197
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1531,12 +1531,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!213 &1551838195
 Sprite:
   m_ObjectHideFlags: 0
@@ -1779,7 +1779,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 7647330929689460508, guid: dfbaad82aa08ec145a8ffdcf44ad02ba, type: 3}
   target: {fileID: 1030322198}
-  fire_rate: 1
+  FireRate: 5
 --- !u!212 &1820735652
 SpriteRenderer:
   m_ObjectHideFlags: 0

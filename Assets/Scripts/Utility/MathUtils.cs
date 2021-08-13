@@ -41,19 +41,9 @@ public static class MathUtils
         /// </summary>
         /// <param name="vector">Vector pointing in the direction the rotation should point.</param>
         /// <returns>A quaternion representation of the rotation pointing the same way as <paramref name="vector"/>.</returns>
-        public static Quaternion FromVector(Vector3 vector)
-        {
-            return new Quaternion(vector);
-        }
-
-        /// <summary>
-        /// Given a vector, returns a rotation oriented the same way.
-        /// </summary>
-        /// <param name="vector">Vector pointing in the direction the rotation should point.</param>
-        /// <returns>A quaternion representation of the rotation pointing the same way as <paramref name="vector"/>.</returns>
         public static Quaternion FromVector(Vector2 vector)
         {
-            return new Quaternion(vector);
+            return Quaternion.Euler(0, 0, Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg);
         }
     }
 }

@@ -11,15 +11,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float maxSpeed = 15.0f;
 
     //cached rigidbody
-    Rigidbody2D rigidbody;
-
-    private void Update()
-    {
-
-    }
+    Rigidbody2D rigidbody2d;
 
     private void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        rigidbody2d = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        transform.rotation = MathUtils.Rotation.FromVector(MouseUtils.GetWorldMousePos(transform.position) - transform.position);
     }
 }
