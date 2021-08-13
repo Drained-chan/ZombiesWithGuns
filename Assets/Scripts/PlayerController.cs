@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour
 
         rigidbody2d.AddForce(netForce);
 
+        //only apply deceleration when there is no player input
+        //(this prevents slow-starting effect)
         if(input.magnitude == 0)
         {
             rigidbody2d.AddForce(-rigidbody2d.velocity * Time.deltaTime * deceleration);
