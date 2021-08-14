@@ -52,7 +52,8 @@ public class ZombieMovement : MonoBehaviour
         else
         {
             Move(xWaypoint, yWaypoint);
-            
+            if ((new Vector3(xWaypoint, yWaypoint, 0) - transform.position).magnitude > 0.1)
+                transform.right = new Vector3(xWaypoint, yWaypoint, 0) - transform.position;
         }
     }
 
@@ -62,7 +63,6 @@ public class ZombieMovement : MonoBehaviour
     {
         float x = Random.Range(-range, range);
         return x;
-        transform.right = new Vector3(xWaypoint, yWaypoint, 0) - transform.position;
     }
 
     // Moves Zombie towards an (x, y) coordinate
