@@ -7,13 +7,14 @@ using UnityEngine.Tilemaps;
 public class mapGen : MonoBehaviour
 {
 	
-	//jank way a tutorial did it so, same, for now
 	[SerializeField] private Tilemap floorTiles;
 	[SerializeField] private Tilemap wallTiles;
+	[SerializeField] private Tilemap BouncyWallTiles;
 	[SerializeField] private Tile floorTile;
 	[SerializeField] private Tile wallTile;
+	[SerializeField] private Tile BouncyWallTile;
 
-	enum LevelTile {empty, floor, wall}; //bouncyWall 2 b added l8r
+	enum LevelTile {empty, floor, wall, bouncyWall}; 
     LevelTile[,] grid;
 	Tilemap tilemap;
 	struct RandomWalker {
@@ -137,34 +138,57 @@ public class mapGen : MonoBehaviour
 	}
 	
 	void CreateWalls(){
+		int bouncyQuota = Mathf.FloorToInt((float)NumberOfFloors() * 0.1f);
+		int bouncyTally = 0;
+		LevelTile tile2Place;
+		bool isBouncy;
+		
 		for (int x = 0; x < levelWidth-1; x++) {
 			for (int y = 0; y < levelHeight-1; y++) {
 				if (grid[x,y] == LevelTile.floor) {
-					if (grid[x,y+1] == LevelTile.empty) {
-						grid[x,y+1] = LevelTile.wall;
+					if (isBouncy = (bouncyTally < bouncyQuota && Random.value < 0.1f)){ 
+						tile2Place = LevelTile.bouncyWall;
+					} else {
+						tile2Place = LevelTile.wall;
 					}
-
-					if (grid[x,y-1] == LevelTile.empty) {
-						grid[x,y-1] = LevelTile.wall;
+					
+					//adjacent blocks                     bit redundant but hey
+					if (grid[x,y+1] == LevelTile.empty || grid[x,y+1] == LevelTile.wall) {
+						grid[x,y+1] = tile2Place;
+						if (isBouncy) bouncyTally++;
 					}
-					if (grid[x+1,y] == LevelTile.empty) {
-						grid[x+1,y] = LevelTile.wall;
+					if (grid[x,y-1] == LevelTile.empty || grid[x,y-1] == LevelTile.wall) {
+						grid[x,y-1] = tile2Place;
+						if (isBouncy) bouncyTally++;
 					}
-					if (grid[x-1,y] == LevelTile.empty) {
-						grid[x-1,y] = LevelTile.wall;
+					if (grid[x+1,y] == LevelTile.empty || grid[x+1,y] == LevelTile.wall) {
+						grid[x+1,y] = tile2Place;
+						if (isBouncy) bouncyTally++;
 					}
-
-                    if (grid[x - 1, y - 1] == LevelTile.empty) {
-                        grid[x - 1, y - 1] = LevelTile.wall;
+					if (grid[x-1,y] == LevelTile.empty || grid[x-1,y] == LevelTile.wall) {
+						grid[x-1,y] = tile2Place;
+						if (isBouncy) bouncyTally++;
+					}
+					//diagonal Blocks
+                    if (grid[x - 1, y - 1] == LevelTile.empty 
+							|| grid[x - 1, y - 1] == LevelTile.wall) {
+                        grid[x - 1, y - 1] = tile2Place;
+						if (isBouncy) bouncyTally++;
                     }
-                    if (grid[x - 1, y + 1] == LevelTile.empty) {
-                        grid[x - 1, y + 1] = LevelTile.wall;
+                    if (grid[x - 1, y + 1] == LevelTile.empty 
+							|| grid[x - 1, y + 1] == LevelTile.wall) {
+                        grid[x - 1, y + 1] = tile2Place;
+						if (isBouncy) bouncyTally++;
                     }
-                    if (grid[x + 1, y + 1] == LevelTile.empty) {
-                        grid[x + 1, y + 1] = LevelTile.wall;
+                    if (grid[x + 1, y + 1] == LevelTile.empty 
+							|| grid[x + 1, y + 1] == LevelTile.wall) {
+                        grid[x + 1, y + 1] = tile2Place;
+						if (isBouncy) bouncyTally++;
                     }
-                    if (grid[x + 1, y - 1] == LevelTile.empty) {
-                        grid[x + 1, y - 1] = LevelTile.wall;
+                    if (grid[x + 1, y - 1] == LevelTile.empty 
+							|| grid[x + 1, y - 1] == LevelTile.wall) {
+                        grid[x + 1, y - 1] = tile2Place;
+						if (isBouncy) bouncyTally++;
                     }
                 }
             }
@@ -195,31 +219,6 @@ public class mapGen : MonoBehaviour
 		return count;
 	}
 	
-	void SpawnLevel(){
-		for (int x = 0; x < levelWidth; x++) {
-			for (int y = 0; y < levelHeight; y++) {
-				switch(grid[x, y]) {
-					case LevelTile.empty:
-						break;
-					case LevelTile.floor:
-						//Spawn(x, y, floorTiles[Random.Range(0, floorTiles.Length)]);
-						floorTiles.SetTile(new Vector3Int(x, y, 0), floorTile); // set new floor
-						break;
-					case LevelTile.wall:
-						//Spawn(x, y, wallTiles[Random.Range(0, wallTiles.Length)]);
-						wallTiles.SetTile(new Vector3Int(x, y, 0), wallTile);
-						break;
-					//case LevelTile.bottomWall:
-						//Spawn(x, y, bottomWallTiles[Random.Range(0, bottomWallTiles.Length)]);
-						
-						//break;
-				}
-			}
-		}
-	}    
-	
-	
-
 	/* nop dont cARE
 	
 	void CreateBottomWalls() {
@@ -234,6 +233,26 @@ public class mapGen : MonoBehaviour
 	
 	
 	*/
+	
+	void SpawnLevel(){
+		for (int x = 0; x < levelWidth; x++) {
+			for (int y = 0; y < levelHeight; y++) {
+				switch(grid[x, y]) {
+					case LevelTile.empty:
+						break;
+					case LevelTile.floor:
+						floorTiles.SetTile(new Vector3Int(x, y, 0), floorTile); // set new floor
+						break;
+					case LevelTile.wall:
+						wallTiles.SetTile(new Vector3Int(x, y, 0), wallTile);
+						break;
+					case LevelTile.bouncyWall:
+						BouncyWallTiles.SetTile(new Vector3Int(x, y, 0), BouncyWallTile);
+						break;
+				}
+			}
+		}
+	}    
 	
 	
 	
