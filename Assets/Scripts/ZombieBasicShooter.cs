@@ -9,6 +9,7 @@ public class ZombieBasicShooter : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private float FireRate = 5f;
     [SerializeField] private float immunity = 0.5f;
+    private Transform firePoint;
     private ZombieMovement zombieMovement;
     float timeLeft;
 
@@ -18,6 +19,7 @@ public class ZombieBasicShooter : MonoBehaviour
         target = GameObject.Find("Player").GetComponent<Transform>();
         timeLeft = FireRate;
         zombieMovement = GetComponent<ZombieMovement>();
+        firePoint = gameObject.transform.GetChild(0);
     }
 
     // Update is called once per frame
@@ -40,7 +42,7 @@ public class ZombieBasicShooter : MonoBehaviour
     }
     void Shoot()
     {
-        Instantiate(bullet, transform.position, Quaternion.identity);
+        Instantiate(bullet, firePoint.position, Quaternion.identity);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
