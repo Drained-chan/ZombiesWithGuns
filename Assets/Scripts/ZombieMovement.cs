@@ -45,9 +45,15 @@ public class ZombieMovement : MonoBehaviour
 
         // If isChasing, move towards the player, else move to waypoint
         if (isChasing)
+        {
             Move(target.position.x, target.position.y);
+            transform.right = target.transform.position - transform.position;
+        }
         else
+        {
             Move(xWaypoint, yWaypoint);
+            
+        }
     }
 
 
@@ -56,6 +62,7 @@ public class ZombieMovement : MonoBehaviour
     {
         float x = Random.Range(-range, range);
         return x;
+        transform.right = new Vector3(xWaypoint, yWaypoint, 0) - transform.position;
     }
 
     // Moves Zombie towards an (x, y) coordinate
@@ -66,10 +73,17 @@ public class ZombieMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // If bullet collides with zombie, destroy bullet and destroy zombie
         if (collision.gameObject.tag == "Bullet")
         {
             Destroy(gameObject);
             Destroy(collision.gameObject);
+        }
+        // If collide with a wall, set the way point to your own position
+        else if (collision.gameObject.tag == "Wall")
+        {
+            xWaypoint = gameObject.transform.position.x;
+            yWaypoint = gameObject.transform.position.y;
         }
         
     }
