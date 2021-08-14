@@ -54,12 +54,10 @@ public static class MouseUtils
             if (fallbackCameraCandidates.Length > 1)
             {
                 Debug.LogWarning("Multiple cameras tagged with MainCamera found in scene! There may be unexpected behavior. All cameras found listed below:");
-                foreach (GameObject cam in fallbackCameraCandidates)
+                foreach (GameObject camCandidate in fallbackCameraCandidates)
                 {
-                    Debug.LogWarning(cam.name);
+                    Debug.LogWarning(camCandidate.name);
                 }
-
-
             }
             else if (fallbackCameraCandidates.Length == 0)
             {
@@ -69,7 +67,15 @@ public static class MouseUtils
             {
                 fallbackCamera = fallbackCameraCandidates[0];
             }
+
+            Camera cam = fallbackCamera.GetComponent<Camera>();
+            if(!cam)
+            {
+                CrashAndBurn("No camera was attached to the main camera object! Camera object: " + fallbackCamera.name);
+            }
+            camera = cam;
         }
+
     }
 
     /// <summary>

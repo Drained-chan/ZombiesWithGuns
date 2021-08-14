@@ -134,6 +134,8 @@ GameObject:
   - component: {fileID: 71516706}
   - component: {fileID: 71516705}
   - component: {fileID: 71516704}
+  - component: {fileID: 71516707}
+  - component: {fileID: 71516708}
   m_Layer: 0
   m_Name: 'Main Camera '
   m_TagString: MainCamera
@@ -206,6 +208,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &71516707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71516703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4ae3c7e9e66ce241ac2ebce7f57a68e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followedObject: {fileID: 2129741070}
+  followDelay: 6
+--- !u!114 &71516708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71516703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281ab73558b1fdf4cbae611adeb1fc91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseDeadzone: 10.2
+  mouseLookDistance: {x: 2, y: 3}
+  mouseLookSpeed: {x: 0.02, y: 0.02}
+  mouseViewScaling: 0.07
+  cameraShakeIntensityMultiplier: 1
+  cameraShakeDurationMultiplier: 1
 --- !u!1 &136244880
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,7 +257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &136244881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,7 +600,7 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf00000000000000000000803f0000803f0000803f00000000000000000000803f00000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
@@ -2642,7 +2676,7 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf00000000000000000000803f0000803f0000803f00000000000000000000803f00000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
@@ -2711,7 +2745,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1545144477
 Rigidbody2D:
   serializedVersion: 4
@@ -3031,7 +3065,7 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf00000000000000000000803f0000803f0000803f00000000000000000000803f00000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
@@ -3798,8 +3832,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee9834ff2e9fb54dacd1c7f9b2be377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
-  CanDie: 0
+  acceleration: 400
+  maxSpeed: 8
+  deceleration: 400
 --- !u!212 &2129741075
 SpriteRenderer:
   m_ObjectHideFlags: 0
