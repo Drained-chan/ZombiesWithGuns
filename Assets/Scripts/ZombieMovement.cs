@@ -8,10 +8,12 @@ public class ZombieMovement : MonoBehaviour
     public float Speed = 4f;
     [SerializeField] private float range = 1f;
     [SerializeField] private float wanderTime = 5f;
+    [SerializeField] private float chaseDistance = 3f;
     private float wanderTimeCounter;
     public bool isChasing = false;
     private float xWaypoint = 0f;
     private float yWaypoint = 0f;
+
    
 
     // Start is called before the first frame update
@@ -33,6 +35,12 @@ public class ZombieMovement : MonoBehaviour
             yWaypoint = transform.position.y - Waypoint(range);
         }
         float distance = Vector3.Distance(target.transform.position, gameObject.transform.position);
+
+        // If target passes distance threshold, switch isChasing
+        if (distance < chaseDistance)
+            isChasing = true;
+        else
+            isChasing = false;
 
         // If isChasing, move towards the player, else move to waypoint
         if (isChasing)
