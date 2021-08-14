@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 83072930}
   m_Layer: 0
   m_Name: bouncyWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -495,7 +495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 4
-  range: 1
+  range: 3
   wanderTime: 5
   chaseDistance: 3
   chaseThreshold: 5
@@ -645,7 +645,7 @@ GameObject:
   - component: {fileID: 417497118}
   m_Layer: 0
   m_Name: wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
