@@ -9,6 +9,7 @@ public class ZombieMovement : MonoBehaviour
     [SerializeField] private float range = 1f;
     [SerializeField] private float wanderTime = 5f;
     [SerializeField] private float chaseDistance = 3f;
+    [SerializeField] private float chaseThreshold = 6f;
     private float wanderTimeCounter;
     public bool isChasing = false;
     private float xWaypoint = 0f;
@@ -39,7 +40,7 @@ public class ZombieMovement : MonoBehaviour
         // If target passes distance threshold, switch isChasing
         if (distance < chaseDistance)
             isChasing = true;
-        else
+        else if (distance > chaseThreshold)
             isChasing = false;
 
         // If isChasing, move towards the player, else move to waypoint
