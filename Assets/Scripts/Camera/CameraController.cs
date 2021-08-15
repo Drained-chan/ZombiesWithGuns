@@ -5,45 +5,45 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     //radius around the player where the camera should be centered
-    [SerializeField] float mouseDeadzone = 10.2f;
+    [SerializeField] private float mouseDeadzone = 10.2f;
     //distance the camera should move when looking at the screen edges
-    [SerializeField] Vector2 mouseLookDistance = new Vector2(2.0f, 3.0f);
+    [SerializeField] private Vector2 mouseLookDistance = new Vector2(2.0f, 3.0f);
     //force camera is moved with when being panned
-    [SerializeField] Vector2 mouseLookSpeed = new Vector2(0.02f, 0.02f);
+    [SerializeField] private Vector2 mouseLookSpeed = new Vector2(0.02f, 0.02f);
 
     //how much to zoom the camera out as it moves away from the player (0 = no zooming)
-    [SerializeField] float mouseViewScaling = 0.07f;
+    [SerializeField] private float mouseViewScaling = 0.07f;
 
     //how much to scale the intensity of incoming camera shakes by
-    [SerializeField] float cameraShakeIntensityMultiplier = 1.0f;
+    [SerializeField] private float cameraShakeIntensityMultiplier = 1.0f;
     //how much to scale the duration of incoming camera shake by
-    [SerializeField] float cameraShakeDurationMultiplier = 1.0f;
+    [SerializeField] private float cameraShakeDurationMultiplier = 1.0f;
 
     //mouse tracking
-    Vector2 currentMouseDelta = Vector2.zero;
-    Vector2 targetMouseDelta;
+    private Vector2 currentMouseDelta = Vector2.zero;
+    private Vector2 targetMouseDelta;
 
     //camera shake
     //how many more seconds to shake the camera
-    float cameraShakeDuration = 0.0f;
+    private float cameraShakeDuration = 0.0f;
     //the intensity of the current shake
-    float cameraShakeIntensity = 0.0f;
-    Vector2 cameraShakeDelta = Vector2.zero;
+    private float cameraShakeIntensity = 0.0f;
+    private Vector2 cameraShakeDelta = Vector2.zero;
 
 
     //camera zoom
     private float baseCameraSize;
 
-    Camera camera;
+    private Camera camera;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         camera = GetComponent<Camera>();
         baseCameraSize = camera.fieldOfView;
     }
 
-    void TickShake()
+    private void TickShake()
     {
         if(cameraShakeDuration <= 0)
         {
@@ -61,7 +61,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    void FollowMouse()
+    private void FollowMouse()
     {
         //vector pointing to mouse
         //this is not portable but good enough for us
@@ -86,7 +86,7 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         FollowMouse();
         TickShake();
