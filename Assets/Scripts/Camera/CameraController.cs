@@ -78,8 +78,6 @@ public class CameraController : MonoBehaviour
     private Vector3 GetRawMousePosition()
     {
         Vector3 adjustedVec = MouseUtils.GetWorldMousePos(new Vector3(0, 0, 0)) - transform.position;
-        //factor out mouse look
-        //adjustedVec -= new Vector3(currentMouseDelta.x, currentMouseDelta.y);
         //factor out screenshake
         adjustedVec -= new Vector3(cameraShakeDelta.x, cameraShakeDelta.y);
 
