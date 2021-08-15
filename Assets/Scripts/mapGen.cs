@@ -7,6 +7,9 @@ using UnityEngine.Tilemaps;
 public class mapGen : MonoBehaviour
 {
 	
+	[SerializeField] private GameObject Zombie;
+	[SerializeField] private GameObject Player;
+	
 	[SerializeField] private Tilemap floorTiles;
 	[SerializeField] private Tilemap wallTiles;
 	[SerializeField] private Tilemap BouncyWallTiles;
@@ -22,26 +25,16 @@ public class mapGen : MonoBehaviour
 		public Vector2 pos;
 	}
 	List<RandomWalker> walkers; 
+	float playerXPos, playerYPos;
 	
-	//why has the mans got all this public...
-	/*
-	public GameObject[] floorTiles;
-    public GameObject[] wallTiles;
-    public GameObject[] bottomWallTiles;
-    public GameObject exit;
-    public GameObject player;
-
-    public GameObject virtualCamera;
-	*/
-
-    public int levelWidth;
-    public int levelHeight;
-	public float percentToFill = 0.2f; 
-	public float chanceWalkerChangeDir = 0.5f;
-    public float chanceWalkerSpawn = 0.05f;
-    public float chanceWalkerDestoy = 0.05f;
-    public int maxWalkers = 10;
-    public int iterationSteps = 100000;
+    [SerializeField] private int levelWidth;
+    [SerializeField] private int levelHeight;
+	[SerializeField] private float percentToFill = 0.2f; 
+	[SerializeField] private float chanceWalkerChangeDir = 0.5f;
+    [SerializeField] private float chanceWalkerSpawn = 0.05f;
+    [SerializeField] private float chanceWalkerDestoy = 0.05f;
+    [SerializeField] private int maxWalkers = 10;
+    [SerializeField] private int iterationSteps = 100000;
 	
 	//        Debug.Log("LOG EXAMPLE" + someVar);
 
@@ -52,7 +45,12 @@ public class mapGen : MonoBehaviour
         CreateWalls();
 		//CreateBottomWalls();
 		SpawnLevel();
-	
+		SpawnPlayer();
+		SpawnZombie();
+		SpawnZombie();
+		SpawnZombie();
+		SpawnZombie();
+		Destroy(Zombie);
 	}
 	
 	void Setup() {
@@ -254,6 +252,34 @@ public class mapGen : MonoBehaviour
 		}
 	}    
 	
+	void SpawnPlayer(){
+		int tileChoose = Mathf.FloorToInt(Random.value * ((float)NumberOfFloors() - 0.01f));
+		int tileNum = 0;
+		for (int x = 0; x < levelWidth - 1; x++){
+			for (int y = 0; y < levelHeight - 1; y++){
+				if (grid[x,y] == LevelTile.floor && ++tileNum == tileChoose){
+					Vector3 pos = new Vector3(x, y, 0);
+					//jank as fuck but cba
+					Player.GetComponent<Transform>().position = pos;
+				}	
+			}
+		}
+	}
+	
+	void SpawnZombie(){
+		int tileChoose = Mathf.FloorToInt(Random.value * ((float)NumberOfFloors() - 0.01f));
+		int tileNum = 0;
+		for (int x = 0; x < levelWidth - 1; x++){
+			for (int y = 0; y < levelHeight - 1; y++){
+				if (grid[x,y] == LevelTile.floor && ++tileNum == tileChoose){
+					Vector3 pos = new Vector3(x, y, 0);
+					//jank as fuck but cba
+					Instantiate(Zombie, pos, Quaternion.identity);
+				}	
+			}
+		}
+	}
+	
 	
 	
 		
@@ -269,5 +295,19 @@ public class mapGen : MonoBehaviour
     {
         
     }
+	*/
+	
+	
+	/*  from original code, why is the local playerObj var needed here??
+	void SpawnPlayer() {
+		Vector3 pos = new Vector3(Mathf.RoundToInt(levelWidth / 2.0f),
+										Mathf.RoundToInt(levelHeight / 2.0f), 0);
+		GameObject playerObj = Instantiate(player, pos, Quaternion.identity) as GameObject;
+        CinemachineVirtualCamera vCam = virtualCamera.GetComponent<CinemachineVirtualCamera>();
+        vCam.m_Follow = playerObj.transform;
+    }
+	
+	
+	
 	*/
 }
