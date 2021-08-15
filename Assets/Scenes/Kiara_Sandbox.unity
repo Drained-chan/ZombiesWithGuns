@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 281ab73558b1fdf4cbae611adeb1fc91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseDeadzone: 10.4
+  mouseDeadzone: 0.4
   mouseLookDistance: {x: 2, y: 3}
   mouseLookSpeed: {x: 0.02, y: 0.02}
   mouseViewScaling: 0.07

@@ -6,7 +6,9 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     //radius around the player where the camera should be centered
-    [SerializeField] private float mouseDeadzone = 10.2f;
+    [SerializeField] private float mouseDeadzone = 0.8f;
+    //the distance away where the mouse is considered "maximally looking" in a given direction
+    [SerializeField] private float mouseSignalLimit = 2.0f;
     //distance the camera should move when looking at the screen edges
     [SerializeField] private Vector2 mouseLookDistance = new Vector2(2.0f, 3.0f);
     //force camera is moved with when being panned
@@ -81,6 +83,8 @@ public class CameraController : MonoBehaviour
         //factor out screenshake
         adjustedVec -= new Vector3(cameraShakeDelta.x, cameraShakeDelta.y);
 
+        adjustedVec.z = 0;
+
         return adjustedVec;
     }
 
@@ -89,9 +93,21 @@ public class CameraController : MonoBehaviour
         //vector pointing to mouse
         Vector3 mouseVec = GetRawMousePosition();
 
-        if(mouseVec.magnitude < mouseDeadzone)
+        float halfHeight = camera.orthographicSize;
+        float halfWidth = halfHeight * camera.aspect;
+
+        float mouseDist = mouseVec.magnitude;
+        if (mouseDist < mouseDeadzone)
         {
             targetMouseDelta = Vector2.zero;
+        }
+        else if (mouseDist < mouseSignalLimit)
+        { //scale partially
+            targetMouseDelta = mouseLookDistance * new Vector2(mouseVec.x, mouseVec.y).normalized;
+
+            float scaleFactor = (mouseDist - mouseDeadzone) / (mouseSignalLimit - mouseDeadzone);
+
+            targetMouseDelta *= scaleFactor;
         }
         else
         {
