@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Camera))]
 public class CameraController : MonoBehaviour
 {
     //radius around the player where the camera should be centered
@@ -22,6 +23,7 @@ public class CameraController : MonoBehaviour
     //mouse tracking
     private Vector2 currentMouseDelta = Vector2.zero;
     private Vector2 targetMouseDelta;
+    private Vector2 mouseLimits;
 
     //camera shake
     //how many more seconds to shake the camera
@@ -30,17 +32,23 @@ public class CameraController : MonoBehaviour
     private float cameraShakeIntensity = 0.0f;
     private Vector2 cameraShakeDelta = Vector2.zero;
 
-
     //camera zoom
     private float baseCameraSize;
 
-    private Camera camera;
+    Camera camera;
 
     // Start is called before the first frame update
     private void Start()
     {
         camera = GetComponent<Camera>();
         baseCameraSize = camera.fieldOfView;
+
+        if (!camera.orthographic)
+        {
+            DebugUtils.CrashAndBurn("This script only supports orthographic cameras!");
+        }
+
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     private void TickShake()
@@ -61,12 +69,26 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// returns the position of the mouse with screenshake/mouse look adjustments removed.
+    /// </summary>
+    /// <returns>a vector pointing from the mouse to the camera's origin point.</returns>
+    private Vector3 GetRawMousePosition()
+    {
+        Vector3 adjustedVec = MouseUtils.GetWorldMousePos(new Vector3(0, 0, 0)) - transform.position;
+        //factor out mouse look
+        //adjustedVec -= new Vector3(currentMouseDelta.x, currentMouseDelta.y);
+        //factor out screenshake
+        adjustedVec -= new Vector3(cameraShakeDelta.x, cameraShakeDelta.y);
+
+        return adjustedVec;
+    }
+
     private void FollowMouse()
     {
         //vector pointing to mouse
-        //this is not portable but good enough for us
-        Vector3 mouseVec = MouseUtils.GetWorldMousePos(new Vector3(0, 0, 0)) - transform.position;
-        
+        Vector3 mouseVec = GetRawMousePosition();
+
         if(mouseVec.magnitude < mouseDeadzone)
         {
             targetMouseDelta = Vector2.zero;
@@ -83,6 +105,19 @@ public class CameraController : MonoBehaviour
         //update camera FOV
         //TODO: consider supporting relative camera size adjustment instead of forced size
         camera.fieldOfView = baseCameraSize * (1 + currentMouseDelta.magnitude * mouseViewScaling);
+
+
+        //TODO: move this to its own script
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+
     }
 
     // Update is called once per frame

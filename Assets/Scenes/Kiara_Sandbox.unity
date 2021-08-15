@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 281ab73558b1fdf4cbae611adeb1fc91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseDeadzone: 10.2
+  mouseDeadzone: 10.4
   mouseLookDistance: {x: 2, y: 3}
   mouseLookSpeed: {x: 0.02, y: 0.02}
   mouseViewScaling: 0.07
@@ -270,9 +270,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b349b4b90a70514fafb13521d08ff7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 7647330929689460508, guid: dfbaad82aa08ec145a8ffdcf44ad02ba, type: 3}
-  target: {fileID: 2129741071}
-  FireRate: 5
 --- !u!212 &136244882
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2736,9 +2733,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1545144481}
   - component: {fileID: 1545144480}
-  - component: {fileID: 1545144479}
   - component: {fileID: 1545144478}
   - component: {fileID: 1545144477}
+  - component: {fileID: 1545144482}
+  - component: {fileID: 1545144479}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -2802,10 +2800,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1545144476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a65200936845ab40a7881e97cfd10e5, type: 3}
+  m_Script: {fileID: 11500000, guid: f146b7cc4b51c50439752cab7bb00f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 4
+  bullet: {fileID: 0}
+  target: {fileID: 2129741071}
+  FireRate: 5
+  immunity: 0.5
 --- !u!212 &1545144480
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2871,6 +2872,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1545144482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545144476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3687c17d559647246bca36158b1354b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 4
+  range: 1
+  wanderTime: 5
+  chaseDistance: 3
+  chaseThreshold: 6
+  isChasing: 0
 --- !u!213 &1627640101
 Sprite:
   m_ObjectHideFlags: 0
