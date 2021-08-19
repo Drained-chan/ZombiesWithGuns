@@ -6,10 +6,9 @@ using UnityEngine;
 /// <summary>
 /// Derive your zombie movement behaviors from this.
 /// </summary>
-[RequireComponent(typeof(ZombieShootBase))]
 public abstract class ZombieMovementBase : MonoBehaviour
 {
-    ZombieShootBase shootBase;
+    private ZombieShootBase shootBase;
 
     /// <summary>
     /// If you use Start() in your behavior, you MUST call base.Start()!!!!

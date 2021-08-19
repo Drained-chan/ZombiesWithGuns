@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class ZombieShootBase : MonoBehaviour
 {
-    ZombieMovementBase moveBase;
+    private ZombieMovementBase moveBase;
 
     /// <summary>
     /// If you use Start() in your behavior, you MUST call base.Start()!!!!
