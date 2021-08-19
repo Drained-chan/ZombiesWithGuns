@@ -112,5 +112,13 @@ public static class MouseUtils
             -projectionSurface.GetDistanceToPoint(camera.transform.position)));
     }
 
-
+    /// <summary>
+    /// Get the main scene camera if one exists.
+    /// </summary>
+    /// <returns></returns>
+    public static Camera GetMainCamera()
+    {
+        SetCamera(null);
+        return camera;
+    }
 }
