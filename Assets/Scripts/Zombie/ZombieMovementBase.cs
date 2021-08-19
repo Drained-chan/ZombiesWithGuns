@@ -17,6 +17,11 @@ public abstract class ZombieMovementBase : MonoBehaviour
     virtual protected void Start()
     {
         shootBase = GetComponent<ZombieShootBase>();
+
+        if(!shootBase)
+        {
+            DebugUtils.CrashAndBurn("Shooting base of some kind is required on " + gameObject.name + "!!!!!");
+        }
     }
 
 
