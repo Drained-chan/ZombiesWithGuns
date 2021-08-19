@@ -2,34 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Camera))]
 public class CameraController : MonoBehaviour
 {
     //radius around the player where the camera should be centered
-    [SerializeField] float mouseDeadzone = 10.2f;
+    [SerializeField] private float mouseDeadzone = 0.8f;
+    //the distance away where the mouse is considered "maximally looking" in a given direction
+    [SerializeField] private float mouseSignalLimit = 2.0f;
     //distance the camera should move when looking at the screen edges
-    [SerializeField] Vector2 mouseLookDistance = new Vector2(2.0f, 3.0f);
+    [SerializeField] private Vector2 mouseLookDistance = new Vector2(2.0f, 3.0f);
     //force camera is moved with when being panned
-    [SerializeField] Vector2 mouseLookSpeed = new Vector2(0.02f, 0.02f);
+    [SerializeField] private Vector2 mouseLookSpeed = new Vector2(0.02f, 0.02f);
 
     //how much to zoom the camera out as it moves away from the player (0 = no zooming)
-    [SerializeField] float mouseViewScaling = 0.07f;
+    [SerializeField] private float mouseViewScaling = 0.07f;
 
     //how much to scale the intensity of incoming camera shakes by
-    [SerializeField] float cameraShakeIntensityMultiplier = 1.0f;
+    [SerializeField] private float cameraShakeIntensityMultiplier = 1.0f;
     //how much to scale the duration of incoming camera shake by
-    [SerializeField] float cameraShakeDurationMultiplier = 1.0f;
+    [SerializeField] private float cameraShakeDurationMultiplier = 1.0f;
 
     //mouse tracking
-    Vector2 currentMouseDelta = Vector2.zero;
-    Vector2 targetMouseDelta;
+    private Vector2 currentMouseDelta = Vector2.zero;
+    private Vector2 targetMouseDelta;
+    private Vector2 mouseLimits;
 
     //camera shake
     //how many more seconds to shake the camera
-    float cameraShakeDuration = 0.0f;
+    private float cameraShakeDuration = 0.0f;
     //the intensity of the current shake
-    float cameraShakeIntensity = 0.0f;
-    Vector2 cameraShakeDelta = Vector2.zero;
-
+    private float cameraShakeIntensity = 0.0f;
+    private Vector2 cameraShakeDelta = Vector2.zero;
 
     //camera zoom
     private float baseCameraSize;
@@ -37,13 +40,20 @@ public class CameraController : MonoBehaviour
     Camera camera;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         camera = GetComponent<Camera>();
         baseCameraSize = camera.fieldOfView;
+
+        if (!camera.orthographic)
+        {
+            DebugUtils.CrashAndBurn("This script only supports orthographic cameras!");
+        }
+
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
-    void TickShake()
+    private void TickShake()
     {
         if(cameraShakeDuration <= 0)
         {
@@ -61,15 +71,41 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    void FollowMouse()
+    /// <summary>
+    /// returns the position of the mouse with screenshake/mouse look adjustments removed.
+    /// </summary>
+    /// <returns>a vector pointing from the mouse to the camera's origin point.</returns>
+    private Vector3 GetRawMousePosition()
+    {
+        Vector3 adjustedVec = MouseUtils.GetWorldMousePos(new Vector3(0, 0, 0)) - transform.position;
+        //factor out screenshake
+        adjustedVec -= new Vector3(cameraShakeDelta.x, cameraShakeDelta.y);
+
+        adjustedVec.z = 0;
+
+        return adjustedVec;
+    }
+
+    private void FollowMouse()
     {
         //vector pointing to mouse
-        //this is not portable but good enough for us
-        Vector3 mouseVec = MouseUtils.GetWorldMousePos(new Vector3(0, 0, 0)) - transform.position;
-        
-        if(mouseVec.magnitude < mouseDeadzone)
+        Vector3 mouseVec = GetRawMousePosition();
+
+        float halfHeight = camera.orthographicSize;
+        float halfWidth = halfHeight * camera.aspect;
+
+        float mouseDist = mouseVec.magnitude;
+        if (mouseDist < mouseDeadzone)
         {
             targetMouseDelta = Vector2.zero;
+        }
+        else if (mouseDist < mouseSignalLimit)
+        { //scale partially
+            targetMouseDelta = mouseLookDistance * new Vector2(mouseVec.x, mouseVec.y).normalized;
+
+            float scaleFactor = (mouseDist - mouseDeadzone) / (mouseSignalLimit - mouseDeadzone);
+
+            targetMouseDelta *= scaleFactor;
         }
         else
         {
@@ -83,10 +119,23 @@ public class CameraController : MonoBehaviour
         //update camera FOV
         //TODO: consider supporting relative camera size adjustment instead of forced size
         camera.fieldOfView = baseCameraSize * (1 + currentMouseDelta.magnitude * mouseViewScaling);
+
+
+        //TODO: move this to its own script
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         FollowMouse();
         TickShake();
