@@ -116,7 +116,7 @@ public static class MouseUtils
     /// Get the main scene camera if one exists.
     /// </summary>
     /// <returns></returns>
-    public Camera GetMainCamera()
+    public static Camera GetMainCamera()
     {
         SetCamera(null);
         return camera;
