@@ -235,6 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseDeadzone: 0.4
+  mouseSignalLimit: 2
   mouseLookDistance: {x: 2, y: 3}
   mouseLookSpeed: {x: 0.02, y: 0.02}
   mouseViewScaling: 0.07
@@ -250,26 +251,13 @@ GameObject:
   m_Component:
   - component: {fileID: 136244883}
   - component: {fileID: 136244882}
-  - component: {fileID: 136244881}
   m_Layer: 0
   m_Name: ZombieWithGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &136244881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 136244880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b349b4b90a70514fafb13521d08ff7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_IsActive: 1
 --- !u!212 &136244882
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -309,7 +297,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 04f9592dfebac3c4b952aedbabb8867e, type: 3}
   m_Color: {r: 0.129807, g: 0.28235295, b: 0.12936097, a: 1}
   m_FlipX: 0
