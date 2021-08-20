@@ -236,9 +236,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b349b4b90a70514fafb13521d08ff7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 7647330929689460508, guid: dfbaad82aa08ec145a8ffdcf44ad02ba, type: 3}
-  target: {fileID: 2129741071}
-  FireRate: 5
 --- !u!212 &136244882
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -566,7 +563,7 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf00000000000000000000803f0000803f0000803f00000000000000000000803f00000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
@@ -2642,7 +2639,7 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf00000000000000000000803f0000803f0000803f00000000000000000000803f00000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
@@ -2750,14 +2747,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.5, y: 0.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &1545144479
 MonoBehaviour:
@@ -2771,7 +2768,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a65200936845ab40a7881e97cfd10e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 4
 --- !u!212 &1545144480
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3031,7 +3027,7 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf00000000000000000000803f0000803f0000803f00000000000000000000803f00000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
@@ -3669,6 +3665,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2022420296}
   - component: {fileID: 2022420295}
+  - component: {fileID: 2022420297}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -3705,6 +3702,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2022420297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022420294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646b16dfafb2ce44b97089bb524a546c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorTiles: {fileID: 720015347}
+  wallTiles: {fileID: 1738913255}
+  BouncyWallTiles: {fileID: 864883336}
+  floorTile: {fileID: 11400000, guid: 5077ceaffa4ba9a4bad9964927c95cc7, type: 2}
+  wallTile: {fileID: 11400000, guid: 7642ee54fa9c243429017179ba62777d, type: 2}
+  BouncyWallTile: {fileID: 11400000, guid: 7642ee54fa9c243429017179ba62777d, type: 2}
+  levelWidth: 0
+  levelHeight: 0
+  percentToFill: 0.2
+  chanceWalkerChangeDir: 0.5
+  chanceWalkerSpawn: 0.05
+  chanceWalkerDestoy: 0.05
+  maxWalkers: 10
+  iterationSteps: 100000
 --- !u!1 &2129741070
 GameObject:
   m_ObjectHideFlags: 0
@@ -3777,14 +3800,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.5, y: 0.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &2129741074
 MonoBehaviour:
@@ -3798,8 +3821,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee9834ff2e9fb54dacd1c7f9b2be377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
-  CanDie: 0
+  acceleration: 400
+  maxSpeed: 8
+  deceleration: 400
 --- !u!212 &2129741075
 SpriteRenderer:
   m_ObjectHideFlags: 0
