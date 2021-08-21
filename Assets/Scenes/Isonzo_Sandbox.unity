@@ -1275,6 +1275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cdccb485b7a83041977d52865a31a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1030322198}
   unwalkableMask:
     serializedVersion: 2
     m_Bits: 64
