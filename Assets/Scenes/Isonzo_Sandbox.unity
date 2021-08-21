@@ -461,6 +461,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!4 &96237889 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5533344918934535051, guid: fc7eab708ec4ccb41ada9962cc435809, type: 3}
+  m_PrefabInstance: {fileID: 5533344919066091480}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &417497116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,6 +1261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 950540315}
   - component: {fileID: 950540314}
+  - component: {fileID: 950540316}
   m_Layer: 0
   m_Name: A*
   m_TagString: Untagged
@@ -1295,6 +1301,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &950540316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950540313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f30854e15ce5f0d4c9606adc9b9d155e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seeker: {fileID: 96237889}
+  target: {fileID: 1030322198}
 --- !u!1 &1030322195
 GameObject:
   m_ObjectHideFlags: 0

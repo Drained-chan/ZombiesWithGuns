@@ -67,6 +67,8 @@ public class Grid : MonoBehaviour
         y = Mathf.Clamp(y, 0, gridSizeY - 1);
         return grid[x, y];
     }
+
+    public List<Node> path;
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, gridWorldSize.y, 1));
@@ -80,6 +82,10 @@ public class Grid : MonoBehaviour
                     Gizmos.color = Color.white;
                 else
                     Gizmos.color = Color.red;
+
+                if (path != null)
+                    if (path.Contains(n))
+                        Gizmos.color = Color.green;
 
                 if (playerNode == n)
                     Gizmos.color = Color.blue;
