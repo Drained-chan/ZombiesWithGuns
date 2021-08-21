@@ -15,5 +15,14 @@ public class Pathfinding : MonoBehaviour
     {
         Node startNode = grid.NodeFromPosition(startPos);
         Node targetNode = grid.NodeFromPosition(targetPos);
+
+        List<Node> openSet = new List<Node>();
+        HashSet<Node> closedSet = new HashSet<Node>();
+        openSet.Add(startNode);
+
+        while (openSet.Count > 0)
+        {
+
+        }
     }
 }
