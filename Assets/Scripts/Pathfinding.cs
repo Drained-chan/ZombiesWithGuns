@@ -37,6 +37,36 @@ public class Pathfinding : MonoBehaviour
             {
                 return;
             }
+            foreach (Node neighbour in grid.GetNeighbours(currentNode))
+            {
+                if (!neighbour.walkable || closedSet.Contains(neighbour))
+                    continue;
+
+                int newMovementCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
+                if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
+                {
+                    // Set new lowest G cost and calculate new H cost for the node to target node so we get accurate f-cost
+                    neighbour.gCost = newMovementCostToNeighbour;
+                    neighbour.hCost = GetDistance(neighbour, targetNode);
+                    neighbour.previous = currentNode; //So we can get a path later on, sort of like linked lists?
+
+                    if (!openSet.Contains(neighbour))
+                        openSet.Add(neighbour);
+                }
+
+            }
         }
+    }
+    int GetDistance(Node A, Node B)
+    {
+        // Each diagonal costs 14, while each straight line costs 10.
+        // We can know the number of diagonals in the distance by checking distance until it's inline, the smaller number is the amount of diagonals
+
+        int distanceX = Mathf.Abs(A.gridX - B.gridX);
+        int distanceY = Mathf.Abs(A.gridY - B.gridY);
+
+        if (distanceX > distanceY)
+            return 14 * distanceY + 10 * (distanceX - distanceY);
+        return 14 * distanceX + (distanceY - distanceX) * 10;
     }
 }

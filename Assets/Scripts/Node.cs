@@ -11,6 +11,7 @@ public class Node
 
     public int gCost;
     public int hCost;
+    public Node previous;
 
     public Node(bool _walkable, Vector2 _worldPos, int _gridX, int _gridY)
     {
