@@ -9,7 +9,7 @@ public class Pathfinding : MonoBehaviour
 
     private void Awake()
     {
-        grid = GetComponent<Grid>();
+        grid = GameObject.Find("A*").GetComponent<Grid>();
     }
 
     private void Update()
