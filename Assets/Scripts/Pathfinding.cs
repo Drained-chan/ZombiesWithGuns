@@ -6,6 +6,7 @@ public class Pathfinding : MonoBehaviour
 {
     public Transform seeker, target;
     Grid grid;
+    private List<Node> path;
 
     private void Awake()
     {
@@ -67,17 +68,17 @@ public class Pathfinding : MonoBehaviour
 
     void RetracePath(Node startNode, Node endNode)
     {
-        List<Node> path = new List<Node>();
+        List<Node> new_path = new List<Node>();
         Node currentNode = endNode;
 
         while (currentNode != startNode)
         {
-            path.Add(currentNode);
+            new_path.Add(currentNode);
             currentNode = currentNode.previous;
         }
         path.Reverse();
 
-        grid.path = path;
+        path = new_path;
     }
     int GetDistance(Node A, Node B)
     {
