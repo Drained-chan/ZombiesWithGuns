@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Grid : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Grid : MonoBehaviour
     public Vector2 gridWorldSize;
     public float nodeRadius;
     Node[,] grid;
+
+    Tilemap floorTiles;
 
     float nodeDiameter;
     int gridSizeX, gridSizeY;
@@ -19,6 +22,8 @@ public class Grid : MonoBehaviour
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
         CreateGrid();
+
+        floorTiles = GameObject.FindGameObjectWithTag("Floor").GetComponent<Tilemap>();
     }
 
     void CreateGrid()
@@ -31,6 +36,8 @@ public class Grid : MonoBehaviour
                 Vector2 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.up * (y * nodeDiameter + nodeRadius);
                 bool walkable = !(Physics2D.OverlapCircle(worldPoint, nodeRadius, unwalkableMask));
                 grid[x, y] = new Node(walkable, worldPoint, x, y);
+                bool walkable_test = true;
+                // walkable_test = floorTiles.HasTile(new Vector3Int(x, y, 0));
             }
     }
 
