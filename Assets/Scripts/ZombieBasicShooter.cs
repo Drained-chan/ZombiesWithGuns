@@ -25,7 +25,6 @@ public class ZombieBasicShooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(timeLeft);
         if (zombieMovement.isChasing)
             transform.right = target.transform.position - transform.position;
         if ((timeLeft < 0) && (zombieMovement.isChasing))
