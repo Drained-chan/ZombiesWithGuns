@@ -6,7 +6,7 @@ public class Pathfinding : MonoBehaviour
 {
     public Transform seeker, target;
     Grid grid;
-    private List<Node> path;
+    public List<Node> path;
 
     private void Awake()
     {
