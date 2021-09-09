@@ -33,10 +33,10 @@ public class Grid : MonoBehaviour
             for (int y = 0; y < gridSizeY; y++)
             {
                 Vector2 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.up * (y * nodeDiameter + nodeRadius);
-                // bool walkable = !(Physics2D.OverlapCircle(worldPoint, nodeRadius, unwalkableMask));
-                bool walkable_test = !(wallTiles.HasTile(new Vector3Int((int)worldPoint.x, (int)worldPoint.y, 0)) || bouncywallTiles.HasTile(new Vector3Int((int)worldPoint.x, (int)worldPoint.y, 0)));
+               // bool walkable = !(Physics2D.OverlapCircle(worldPoint, nodeRadius, unwalkableMask));
+                bool walkable = !(wallTiles.HasTile(new Vector3Int((int)worldPoint.x, (int)worldPoint.y, 0)) || bouncywallTiles.HasTile(new Vector3Int((int)worldPoint.x, (int)worldPoint.y, 0)));
                 
-                grid[x, y] = new Node(walkable_test, worldPoint, x, y);
+                grid[x, y] = new Node(walkable, worldPoint, x, y);
             }
     }
 

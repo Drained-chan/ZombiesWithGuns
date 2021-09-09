@@ -42,7 +42,7 @@ public class Pathfinding : MonoBehaviour
 
             if (currentNode == targetNode)
             {
-                RetracePath(startNode, targetNode);
+                path = RetracePath(startNode, targetNode);
                 return;
             }
             foreach (Node neighbour in grid.GetNeighbours(currentNode))
@@ -66,7 +66,7 @@ public class Pathfinding : MonoBehaviour
         }
     }
 
-    void RetracePath(Node startNode, Node endNode)
+    List<Node> RetracePath(Node startNode, Node endNode)
     {
         List<Node> new_path = new List<Node>();
         Node currentNode = endNode;
@@ -76,9 +76,9 @@ public class Pathfinding : MonoBehaviour
             new_path.Add(currentNode);
             currentNode = currentNode.previous;
         }
-        path.Reverse();
+        new_path.Reverse();
 
-        path = new_path;
+        return new_path;
     }
     int GetDistance(Node A, Node B)
     {
